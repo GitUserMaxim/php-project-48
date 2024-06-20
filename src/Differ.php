@@ -13,19 +13,19 @@ function genDiff(string $filePath1, string $filePath2)
 
     $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right)); // сортируем ключи по алфавиту
 
-    //print_r ($sortedKeys);
     $diff = array_map(function ($key) use ($fileData1, $fileData2) {
         if (array_key_exists($key, $fileData1) && array_key_exists($key, $fileData2)) {
             if ($fileData1[$key] === $fileData2[$key]) {
-                return "  $key: " . var_export($fileData1[$key], true);
+                return "    $key: " . print_r($fileData1[$key], true);
             } else {
-                return "- $key: " . $fileData1[$key] . "\n+ $key: " . $fileData2[$key];
+                return "  - $key: " . var_export($fileData1[$key], true) . "\n  + $key: " . var_export($fileData2[$key], true);
             }
         } elseif (array_key_exists($key, $fileData1)) {
-            return "- $key: " . var_export($fileData1[$key], true);
+            return "  - $key: " . var_export($fileData1[$key], true);
         } elseif (array_key_exists($key, $fileData2)) {
-            return "+ $key: " . var_export($fileData2[$key], true);
+            return "  + $key: " . var_export($fileData2[$key], true);
         }
     }, $sortedKeys);
-    echo "{\n" . implode("\n", $diff) . "\n}\n";
+        echo "{\n" . implode("\n", $diff) . "\n}";
+        return "{\n" . implode("\n", $diff) . "\n}";
 }
