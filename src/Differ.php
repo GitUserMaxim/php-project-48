@@ -41,6 +41,6 @@ function genDiff(string $filePath1, string $filePath2)
             return "  + $key: " . formatValue($fileData2[$key]);
         }
     }, $sortedKeys);
-        echo "{\n" . implode("\n", $diff) . "\n}";
+        //echo "{\n" . implode("\n", $diff) . "\n}";
         return "{\n" . implode("\n", $diff) . "\n}";
 }
