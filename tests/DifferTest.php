@@ -8,7 +8,6 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-
     public function testGendiff(): void
     {
         $expected = '{
