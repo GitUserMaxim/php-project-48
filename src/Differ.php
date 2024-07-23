@@ -3,6 +3,7 @@
 namespace Differ\Differ;
 
 use function Functional\sort;
+use function Differ\Parsers\parseFile;
 
 function formatValue(mixed $value): mixed
 {
@@ -21,8 +22,8 @@ function formatValue(mixed $value): mixed
 
 function genDiff(string $filePath1, string $filePath2)
 {
-    $fileData1 = json_decode(file_get_contents($filePath1), true); // читаем файл, декодируем в массив
-    $fileData2 = json_decode(file_get_contents($filePath2), true);
+    $fileData1 = (array) parseFile($filePath1); // читаем файл, декодируем в массив
+    $fileData2 = (array) parseFile($filePath2);
 
     $keys = array_unique(array_merge(array_keys($fileData1), array_keys($fileData2))); //находим все ключи
 
@@ -41,6 +42,6 @@ function genDiff(string $filePath1, string $filePath2)
             return "  + $key: " . formatValue($fileData2[$key]);
         }
     }, $sortedKeys);
-        //echo "{\n" . implode("\n", $diff) . "\n}";
+       // echo "{\n" . implode("\n", $diff) . "\n}";
         return "{\n" . implode("\n", $diff) . "\n}";
 }

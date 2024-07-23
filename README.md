@@ -10,3 +10,16 @@
 
 ### PHP Linter and Tests
 [![PHP Linter and Tests](https://github.com/GitUserMaxim/php-project-48/actions/workflows/test.yml/badge.svg)](https://github.com/GitUserMaxim/php-project-48/actions/workflows/test.yml)
+
+
+Comparing two flat json files
+```
+$ ./bin/gendiff file1.json file2.json
+```
+[![asciicast](https://asciinema.org/a/3NHwmasKRxCBrI1qT05FZPyBc.svg)](https://asciinema.org/a/3NHwmasKRxCBrI1qT05FZPyBc)
+
+Comparing two flat yml files
+```
+$ ./bin/gendiff file1.yml file2.yml
+```
+[![asciicast](https://asciinema.org/a/yts5K8wDOpfpdwgHPhjxFLV25.svg)](https://asciinema.org/a/yts5K8wDOpfpdwgHPhjxFLV25)

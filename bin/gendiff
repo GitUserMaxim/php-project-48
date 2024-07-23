@@ -2,6 +2,8 @@
 
 <?php
 
+use function Differ\Differ\genDiff;
+
 $autoloadPath1 = __DIR__ . "/../../../autoload.php";
 $autoloadPath2 = __DIR__ . "/../vendor/autoload.php";
 
@@ -28,5 +30,18 @@ Options:
 DOC;
 
 $args = Docopt::handle($doc, array('version'=>'GenDiff 1.0'));
-foreach ($args as $k=>$v)
-    echo $k.': '.json_encode($v).PHP_EOL;
+$firstFile = $args['<firstFile>'];
+$secondFile = $args['<secondFile>'];
+// Normalize paths
+if (!preg_match('/^\/|^\w:\//', $firstFile)) {
+    $firstFile = realpath(__DIR__ . '/../tests/fixtures/' . $firstFile);
+} else {
+    $firstFile = realpath($firstFile);
+}
+if (!preg_match('/^\/|^\w:\//', $secondFile)) {
+    $secondFile = realpath(__DIR__ . '/../tests/fixtures/' . $secondFile);
+} else {
+    $secondFile = realpath($secondFile);
+}
+$result = genDiff($firstFile, $secondFile);
+echo $result; // Вывод
