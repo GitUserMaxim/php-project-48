@@ -3,7 +3,7 @@ install:
 validate:
 	composer validate
 lint:
-	composer exec --verbose phpcs -- --standard=PSR12 src bin tests
+	composer exec --verbose phpcs -- --standard=PSR12 --colors src bin tests
 beauty:
 	composer exec --verbose phpcbf -- --standard=PSR12 src bin tests
 up:

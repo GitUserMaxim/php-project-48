@@ -1,1 +1,1 @@
-{"version":1,"defects":{"Hexlet\\Code\\DifferTest\\DifferTest::testGendiff":7,"Hexlet\\Code\\DifferTest\\DifferTest::testFlatFileComparison":7},"times":{"Hexlet\\Code\\DifferTest\\DifferTest::testGendiff":0.01,"Hexlet\\Code\\DifferTest\\DifferTest::testFlatFileComparison":0.009}}
+{"version":1,"defects":{"Hexlet\\Code\\DifferTest\\DifferTest::testGendiff":7,"Hexlet\\Code\\DifferTest\\DifferTest::testFlatFileComparison":7},"times":{"Hexlet\\Code\\DifferTest\\DifferTest::testGendiff":0.039,"Hexlet\\Code\\DifferTest\\DifferTest::testFlatFileComparison":0.006}}

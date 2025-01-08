@@ -23,3 +23,9 @@ Comparing two flat yml files
 $ ./bin/gendiff file1.yml file2.yml
 ```
 [![asciicast](https://asciinema.org/a/yts5K8wDOpfpdwgHPhjxFLV25.svg)](https://asciinema.org/a/yts5K8wDOpfpdwgHPhjxFLV25)
+
+Comparing two nested json files
+```
+$ ./bin/gendiff file1.json file2.json
+```
+[![asciicast](https://asciinema.org/a/ssTDmoBxIvI5EHP48L3xLdtVT.svg)](https://asciinema.org/a/ssTDmoBxIvI5EHP48L3xLdtVT)
