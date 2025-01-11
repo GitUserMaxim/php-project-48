@@ -4,16 +4,16 @@ namespace Differ\Differ;
 
 use function Functional\sort;
 use function Differ\Parsers\parseFile;
-use function Differ\Formatter\transformTree;
+use function Differ\Formatter\formatOutput;
 
-function genDiff(string $filePath1, string $filePath2, string $format = 'stylish')
+function genDiff(string $filePath1, string $filePath2, string $formatName = 'stylish')
 {
     $fileData1 = parseFile($filePath1); // читаем файл, декодируем в массив
     $fileData2 = parseFile($filePath2);
 
-
     $diff = buildDiffTree($fileData1, $fileData2);
-    return transformTree($diff);
+    $result = formatOutput($diff, $formatName);
+    return $result;
 }
 
 

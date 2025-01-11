@@ -11,7 +11,7 @@ function parseFile(string $filepath): array
     if ($extension === 'json') {
         $data = json_decode(file_get_contents($filepath), true);
     } elseif (in_array($extension, ['yml', 'yaml'], true)) {
-        $data = Yaml::parseFile($filepath, Yaml::PARSE_OBJECT_FOR_MAP);
+        $data = Yaml::parseFile($filepath);
     } else {
         throw new \Exception("Unsupported file format: $extension");
     }

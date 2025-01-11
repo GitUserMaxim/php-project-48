@@ -10,50 +10,39 @@ class DifferTest extends TestCase
 {
     public function testGendiff(): void
     {
-        $expected = '{
-    common: {
-      + follow: false
-        setting1: Value 1
-      - setting2: 200
-      - setting3: true
-      + setting3: null
-      + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
-        setting6: {
-            doge: {
-              - wow: 
-              + wow: so much
-            }
-            key: value
-          + ops: vops
-        }
+        $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file2.json', 'stylish'));
     }
-    group1: {
-      - baz: bas
-      + baz: bars
-        foo: bar
-      - nest: {
-            key: value
-        }
-      + nest: str
+
+
+    public function testGendiffPlainFormatJson(): void
+    {
+        $expectedPlain = file_get_contents('tests/fixtures/expectedPlain.txt');
+
+        $this->assertEquals($expectedPlain, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file2.json', 'plain'));
     }
-  - group2: {
-        abc: 12345
-        deep: {
-            id: 45
-        }
+
+
+    public function testGendiffYamlPlain(): void
+    {
+        $expected = file_get_contents('tests/fixtures/expectedPlain.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file3.yml', 'tests/fixtures/file4.yaml', 'plain'));
     }
-  + group3: {
-        deep: {
-            id: {
-                number: 45
-            }
-        }
-        fee: 100500
+
+
+    public function testGendiffYaml(): void
+    {
+        $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file3.yml', 'tests/fixtures/file4.yaml', 'stylish'));
     }
-}';
-        $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file2.json'));
+
+    public function testGendiffYamlJson(): void
+    {
+        $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file4.yaml', 'stylish'));
     }
 }

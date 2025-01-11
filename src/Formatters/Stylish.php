@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Formatter;
+namespace Differ\Formatters\Stylish;
 
 function toString(mixed $value): string
 {
@@ -13,7 +13,7 @@ function toString(mixed $value): string
     return trim(var_export($value, true), "'");
 }
 
-function transformTree(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
+function stylishFormat(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
 {
     if (!is_array($value)) {
         return toString($value);
