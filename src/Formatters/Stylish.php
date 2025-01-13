@@ -45,28 +45,28 @@ function stylishFormat(mixed $value, string $replacer = ' ', int $spaceCount = 4
     return $iter($value, 1);
 }
 
-function formatItem($item, $key, $indentImmutableType, $indentMutableType, $iter, $depth)
+function formatItem(mixed $item, string $key, string $indentImmutableType, string $indentMutableType, callable $iter, int $depth): string
 {
     if (!is_array($item)) {
-        return $indentImmutableType . $key . ': ' . $iter($item, $depth + 1);
+        return "{$indentImmutableType}{$key}: {$iter($item, $depth + 1)}";
     }
     if (!array_key_exists('type', $item)) {
-        return $indentImmutableType . $key . ': ' . $iter($item, $depth + 1);
+        return "{$indentImmutableType}{$key}: {$iter($item, $depth + 1)}";
     }
 
     switch ($item['type']) {
         case 'added':
-            return $indentMutableType . '+ ' . $item['key'] . ': ' . $iter($item['value'] ?? 'null', $depth + 1);
+            return "{$indentMutableType}+ {$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
         case 'deleted':
-            return $indentMutableType . '- ' . $item['key'] . ': ' . $iter($item['value'] ?? 'null', $depth + 1);
+            return "{$indentMutableType}- {$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
         case 'changed':
-            return $indentMutableType . '- ' . $item['key'] . ': ' . $iter($item['valueOld'] ?? 'null', $depth + 1) .
-                "\n" . $indentMutableType . '+ ' . $item['key'] . ': ' . $iter($item['valueNew'] ?? 'null', $depth + 1);
+            return "{$indentMutableType}- {$item['key']}: {$iter($item['valueOld'] ?? 'null', $depth + 1)}\n" .
+                   "{$indentMutableType}+ {$item['key']}: {$iter($item['valueNew'] ?? 'null', $depth + 1)}";
         case 'unchanged':
-            return $indentImmutableType . $item['key'] . ': ' . $iter($item['value'] ?? 'null', $depth + 1);
+            return "{$indentImmutableType}{$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
         case 'nested':
-            return $indentImmutableType . $item['key'] . ': ' . $iter($item['children'] ?? [], $depth + 1);
+            return "{$indentImmutableType}{$item['key']}: {$iter($item['children'] ?? [], $depth + 1)}";
         default:
-            return $indentImmutableType . $key . ': ' . $iter($item, $depth + 1);
+            return "{$indentImmutableType}{$key}: {$iter($item, $depth + 1)}";
     }
 }
