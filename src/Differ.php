@@ -6,9 +6,9 @@ use function Functional\sort;
 use function Differ\Parsers\parseFile;
 use function Differ\Formatter\formatOutput;
 
-function genDiff(string $filePath1, string $filePath2, string $formatName = 'stylish')
+function genDiff(string $filePath1, string $filePath2, string $formatName = 'stylish'): string
 {
-    $fileData1 = parseFile($filePath1); // читаем файл, декодируем в массив
+    $fileData1 = parseFile($filePath1);
     $fileData2 = parseFile($filePath2);
 
     $diff = buildDiffTree($fileData1, $fileData2);
@@ -18,11 +18,11 @@ function genDiff(string $filePath1, string $filePath2, string $formatName = 'sty
 
 
 
-function buildDiffTree(array $fileData1, array $fileData2)
+function buildDiffTree(array $fileData1, array $fileData2): array
 {
-    $keys = array_unique(array_merge(array_keys($fileData1), array_keys($fileData2))); //находим все ключи
+    $keys = array_unique(array_merge(array_keys($fileData1), array_keys($fileData2)));
 
-    $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right)); // сортируем ключи по алфавиту
+    $sortedKeys = sort($keys, fn ($left, $right) => strcmp($left, $right));
 
     $diffTree = array_map(function ($key) use ($fileData1, $fileData2) {
 

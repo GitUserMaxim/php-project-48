@@ -8,7 +8,7 @@ use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    public function testGendiff(): void
+    public function testGendiffJsonJsonStilish(): void
     {
         $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
 
@@ -16,7 +16,7 @@ class DifferTest extends TestCase
     }
 
 
-    public function testGendiffPlainFormatJson(): void
+    public function testGendiffJsonJsonPlain(): void
     {
         $expectedPlain = file_get_contents('tests/fixtures/expectedPlain.txt');
 
@@ -24,7 +24,7 @@ class DifferTest extends TestCase
     }
 
 
-    public function testGendiffYamlPlain(): void
+    public function testGendiffYamlYmlPlain(): void
     {
         $expected = file_get_contents('tests/fixtures/expectedPlain.txt');
 
@@ -32,17 +32,31 @@ class DifferTest extends TestCase
     }
 
 
-    public function testGendiffYaml(): void
+    public function testGendiffYamlYmlStylish(): void
     {
         $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
 
         $this->assertEquals($expected, genDiff('tests/fixtures/file3.yml', 'tests/fixtures/file4.yaml', 'stylish'));
     }
 
-    public function testGendiffYamlJson(): void
+    public function testGendiffYamlJsonStylish(): void
     {
         $expected = file_get_contents('tests/fixtures/expectedStylish.txt');
 
         $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file4.yaml', 'stylish'));
+    }
+
+    public function testGendiffJsonYamlJson(): void
+    {
+        $expected = file_get_contents('tests/fixtures/expectedJson.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file4.yaml', 'json'));
+    }
+
+    public function testGendiffJson2Json(): void
+    {
+        $expected = file_get_contents('tests/fixtures/expectedJson.txt');
+
+        $this->assertEquals($expected, genDiff('tests/fixtures/file1.json', 'tests/fixtures/file2.json', 'json'));
     }
 }
