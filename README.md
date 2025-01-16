@@ -23,4 +23,4 @@ $ ./bin/gendiff file1.json file2.json
 ```
 ./bin/gendiff tests/fixtures/file1.json tests/fixtures/file4.yaml --format json
 ```
-[![asciicast](https://asciinema.org/a/698109.svg)](https://asciinema.org/a/698109)
+[![asciicast](https://asciinema.org/a/698541.svg)](https://asciinema.org/a/698541)
