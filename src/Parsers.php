@@ -8,15 +8,22 @@ function parseFile(string $filepath): array
 {
     $extension = pathinfo($filepath, PATHINFO_EXTENSION);
 
-    if ($extension === 'json') {
-        $data = json_decode(file_get_contents($filepath), true);
-        if ($data === false) {
-            throw new \Exception("Failed to read file: $filepath");
-        }
-    } elseif (in_array($extension, ['yml', 'yaml'], true)) {
-        $data = Yaml::parseFile($filepath);
-    } else {
-        throw new \Exception("Unsupported file format: $extension");
+    switch ($extension) {
+        case 'json':
+            $jsonContent = file_get_contents($filepath);
+            $data = json_decode($jsonContent, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new \Exception("Failed to decode JSON from file: $filepath. Error: " . json_last_error_msg());
+            }
+            break;
+
+        case 'yml':
+        case 'yaml':
+            $data = Yaml::parseFile($filepath);
+            break;
+
+        default:
+            throw new \Exception("Unsupported file format: $extension");
     }
 
     return $data;
