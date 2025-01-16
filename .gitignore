@@ -4,3 +4,4 @@
 *.cast
 .phpunit.cache
 .phpunit.cache/
+.phpunit.result.cache

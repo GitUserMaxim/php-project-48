@@ -62,7 +62,7 @@ function formatItem(mixed $item, string $key, string $indMut, string $indImmut, 
         case 'changed':
                 $oldValue = $iter($item['valueOld'] ?? 'null', $depth + 1);
                 $newValue = $iter($item['valueNew'] ?? 'null', $depth + 1);
-            return "{$indMut}- {$item['key']}: {$oldValue}\n{$indentMutableType}+ {$item['key']}: {$newValue}";
+            return "{$indMut}- {$item['key']}: {$oldValue}\n{$indMut}+ {$item['key']}: {$newValue}";
         case 'unchanged':
             return "{$indImmut}{$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
         case 'nested':
