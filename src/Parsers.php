@@ -11,10 +11,11 @@ function parseFile(string $filepath): array
     switch ($extension) {
         case 'json':
             $jsonContent = file_get_contents($filepath);
-            $data = json_decode($jsonContent, true);
-            if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \Exception("Failed to decode JSON from file: $filepath. Error: " . json_last_error_msg());
+            if ($jsonContent === false) {
+                throw new \Exception("Can't read a file: $filepath");
             }
+
+            $data = json_decode($jsonContent, true, JSON_THROW_ON_ERROR);
             break;
 
         case 'yml':
