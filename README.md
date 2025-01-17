@@ -1,4 +1,49 @@
-### Hexlet tests and linter status:
+# Configuration File Comparator Utility
+<p>This utility compares two configuration files and outputs the results in various formats.</p>
+
+## Features
+
+- **Support for Multiple Input Formats**: The utility can handle configuration files in both YAML(YML) and JSON formats.
+- **Report Generation**: Generate comparison reports in various formats:
+  - **Plain**: A straightforward text representation of the differences.
+  - **Stylish**: A visually appealing format that highlights changes.
+  - **JSON**: A structured output in JSON format for easy parsing.
+
+## Minimum Requirements
+
+- **Composer**: >= 2.2
+- **PHP**: >= 8.1
+
+
+## Installation
+```bash
+$ git clone https://github.com/GitUserMaxim/php-project-48
+
+$ make install
+```
+## Usage Instructions
+```
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format <fmt>] <firstFile> <secondFile>
+``` 
+Options:
+```
+  -h --help                     Show this screen
+  -v --version                  Show version
+  --format <fmt>                Report format [default: stylish]
+```
+Format options:
+
+You can specify the output format using the `--format` option. The available formats are:
+- stylish: A visually appealing format that highlights changes.
+- plain: A straightforward text representation of the differences.
+- json: A structured output in JSON format for easy parsing.
+
+Example:
+```
+$ ./bin/gendiff tests/fixtures/file1.json tests/fixtures/file4.yaml --format json
+```
 ### Actions Status
 [![Actions Status](https://github.com/GitUserMaxim/php-project-48/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/GitUserMaxim/php-project-48/actions)
 

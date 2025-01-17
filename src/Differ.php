@@ -8,14 +8,29 @@ use function Differ\Formatter\formatOutput;
 
 function genDiff(string $filePath1, string $filePath2, string $formatName = 'stylish'): string
 {
-    $fileData1 = parseFile($filePath1);
-    $fileData2 = parseFile($filePath2);
-
-    $diff = buildDiffTree($fileData1, $fileData2);
-    $result = formatOutput($diff, $formatName);
-    return $result;
+    return formatOutput(
+        buildDiffTree(
+            parseFile(getData($filePath1), getExtension($filePath1)),
+            parseFile(getData($filePath2), getExtension($filePath2))
+        ),
+        $formatName
+    );
 }
 
+
+function getExtension(string $filePath): string
+{
+    return $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+}
+
+function getData(string $filePath): string
+{
+    $fileData = @file_get_contents($filePath);
+    if ($fileData !== false) {
+        return $fileData;
+    }
+    throw new \Exception("File not found");
+}
 
 
 function buildDiffTree(array $fileData1, array $fileData2): array
@@ -45,7 +60,7 @@ function buildDiffTree(array $fileData1, array $fileData2): array
                 'children' => buildDiffTree($value1, $value2)];
         }
 
-        return ['key' => $key, 'type' => 'changed', 'valueOld' => $value1, 'valueNew' => $value2];
+        return ['key' => $key, 'type' => 'changed', 'value1' => $value1, 'value2' => $value2];
     }, $sortedKeys);
 
     return $diffTree;

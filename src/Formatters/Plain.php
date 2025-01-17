@@ -13,7 +13,7 @@ function toString(mixed $value): string
     return var_export($value, true);
 }
 
-function plainFormat(array $diff, string $parentKey = ''): string
+function formatPlain(array $diff, string $parentKey = ''): string
 {
     return implode(PHP_EOL, array_filter(array_map(function ($node) use ($parentKey) {
         $key = $node['key'];
@@ -30,10 +30,10 @@ function plainFormat(array $diff, string $parentKey = ''): string
             'changed' => sprintf(
                 "Property '%s' was updated. From %s to %s",
                 $fullKey,
-                toString($node['valueOld']),
-                toString($node['valueNew'])
+                toString($node['value1']),
+                toString($node['value2'])
             ),
-            'nested' => plainFormat($node['children'], $fullKey),
+            'nested' => formatPlain($node['children'], $fullKey),
             default => null,
         };
     }, $diff)));

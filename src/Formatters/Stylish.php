@@ -13,7 +13,7 @@ function toString(mixed $value): string
     return trim(var_export($value, true), "'");
 }
 
-function stylishFormat(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
+function formatStylish(mixed $value, string $replacer = ' ', int $spaceCount = 4): string
 {
     if (!is_array($value)) {
         return toString($value);
@@ -60,8 +60,8 @@ function formatItem(mixed $item, string $key, string $indMut, string $indImmut, 
         case 'deleted':
             return "{$indMut}- {$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
         case 'changed':
-                $oldValue = $iter($item['valueOld'] ?? 'null', $depth + 1);
-                $newValue = $iter($item['valueNew'] ?? 'null', $depth + 1);
+                $oldValue = $iter($item['value1'] ?? 'null', $depth + 1);
+                $newValue = $iter($item['value2'] ?? 'null', $depth + 1);
             return "{$indMut}- {$item['key']}: {$oldValue}\n{$indMut}+ {$item['key']}: {$newValue}";
         case 'unchanged':
             return "{$indImmut}{$item['key']}: {$iter($item['value'] ?? 'null', $depth + 1)}";
